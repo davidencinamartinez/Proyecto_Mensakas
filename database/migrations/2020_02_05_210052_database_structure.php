@@ -17,9 +17,9 @@ class DatabaseStructure extends Migration {
             $table->increments('ID');
             $table->string('EMAIL',64)->unique();
             $table->string('PASSWORD');
-            $table->integer('ROLE'); // 1 (ADMIN) / 2 (BUSINESS) / 3 (DELIVERER) / 4 (CONSUMER)
+            // $table->integer('ROLE'); // 1 (ADMIN) / 2 (BUSINESS) / 3 (DELIVERER) / 4 (CONSUMER)
             $table->rememberToken();
-            $table->string('LOCATION')->nullable();
+            // $table->string('LOCATION')->nullable();
         });
 
         Schema::create('CATEGORIES', function (Blueprint $table) {
@@ -28,6 +28,7 @@ class DatabaseStructure extends Migration {
             $table->string('NAME');
         });
 
+        /*
         Schema::create('FRANCHISES', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('ID');
@@ -36,15 +37,15 @@ class DatabaseStructure extends Migration {
             $table->string('FRANCHISE_NAME');
             $table->string('FRANCHISE_DESCRIPTION');
         });        
+        */
 
         Schema::create('BUSINESSES', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('ID');
-            $table->unsignedInteger('FRANCHISE_ID');
-            $table->foreign('FRANCHISE_ID')->references('ID')->on('FRANCHISES');
             $table->unsignedInteger('CATEGORY_ID');
             $table->foreign('CATEGORY_ID')->references('ID')->on('CATEGORIES');
-            $table->string('NAME');
+            $table->string('BUS_NAME');
+            $table->string('BUS_DESCRIPTION');
             $table->integer('POSTAL_CODE');
         });
 
@@ -55,8 +56,8 @@ class DatabaseStructure extends Migration {
             $table->foreign('BUS_ID')->references('ID')->on('BUSINESSES');
             $table->string('ITEM_NAME');
             $table->string('ITEM_DESCRIPTION')->nullable();
-            $table->float('PRICE', 3, 2);
-            $table->boolean('ITEM_STATUS'); // ENABLED (True) / DISABLED (False)
+            $table->float('PRICE', 5, 2);
+            $table->boolean('ITEM_STATUS'); // ENABLED (1) / DISABLED (2)
         });
 
         Schema::create('EXTRAS', function (Blueprint $table) {
@@ -66,9 +67,10 @@ class DatabaseStructure extends Migration {
             $table->foreign('BUS_ID')->references('ID')->on('BUSINESSES');
             $table->string('EXTRA_NAME');
             $table->string('EXTRA_DESCRIPTION')->nullable();
-            $table->boolean('EXTRA_STATUS'); // ENABLED (True) / DISABLED (False)
+            $table->boolean('EXTRA_STATUS'); // ENABLED (1) / DISABLED (2)
         });
 
+        /*
         Schema::create('CARTS', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('ID');
@@ -78,6 +80,7 @@ class DatabaseStructure extends Migration {
             $table->string('ITEMS'); // ARRAY OF ITEMS (JSON)
             $table->string('EXTRAS')->nullable(); // ARRAY OF EXTRAS (JSON)
         });    
+        */
 
         Schema::create('ORDERS', function (Blueprint $table) {
             $table->engine = 'InnoDB';
@@ -113,12 +116,12 @@ class DatabaseStructure extends Migration {
 
         Schema::dropIfExists('USERS');
         Schema::dropIfExists('CATEGORIES');
-        Schema::dropIfExists('FRANCHISES');
+        // Schema::dropIfExists('FRANCHISES');
         Schema::dropIfExists('BUSINESSES');
         Schema::dropIfExists('ITEMS');
         Schema::dropIfExists('EXTRAS');
-        Schema::dropIfExists('CARTS');
+        // Schema::dropIfExists('CARTS');
         Schema::dropIfExists('ORDERS');
-        Schema::dropIfExists('DELIVERIES');
+        // Schema::dropIfExists('DELIVERIES');
     }
 }
