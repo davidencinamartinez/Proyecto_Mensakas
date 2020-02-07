@@ -56,18 +56,18 @@ class DatabaseStructure extends Migration {
             $table->foreign('BUS_ID')->references('ID')->on('BUSINESSES');
             $table->string('ITEM_NAME');
             $table->string('ITEM_DESCRIPTION')->nullable();
-            $table->float('PRICE', 5, 2);
+            $table->float('ITEM_PRICE', 5, 2);
             $table->boolean('ITEM_STATUS'); // ENABLED (1) / DISABLED (2)
         });
 
         Schema::create('EXTRAS', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('ID');
-            $table->unsignedInteger('BUS_ID');
-            $table->foreign('BUS_ID')->references('ID')->on('BUSINESSES');
+            $table->unsignedInteger('ITEM_ID');
+            $table->foreign('ITEM_ID')->references('ID')->on('ITEMS');
             $table->string('EXTRA_NAME');
-            $table->string('EXTRA_DESCRIPTION')->nullable();
-            $table->boolean('EXTRA_STATUS'); // ENABLED (1) / DISABLED (2)
+            $table->float('EXTRA_PRICE', 5, 2);
+            // $table->boolean('EXTRA_STATUS'); // ENABLED (1) / DISABLED (2)
         });
 
         /*
@@ -106,6 +106,8 @@ class DatabaseStructure extends Migration {
             $table->foreign('DELIVERER_ID')->references('ID')->on('USERS');
         });        
     }
+
+    // PENDANT (PAYMENTS TABLE)
 
     /**
      * Reverse the migrations.

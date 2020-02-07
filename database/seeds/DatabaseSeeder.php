@@ -60,27 +60,46 @@ class DatabaseSeeder extends Seeder {
         	[	'BUS_ID' => 4,
         		'ITEM_NAME' => 'Trío de quinoa eco',
         		'ITEM_DESCRIPTION' => '5 lechugas, brócoli, tomate seco, naranja vinagreta tamarindo, semillas y especias "zaatar".',
-        		'PRICE' => 10.70,
+        		'ITEM_PRICE' => 10.70,
         		'ITEM_STATUS' => 1
         	],
         	[	'BUS_ID' => 2,
         		'ITEM_NAME' => 'Tataki de atún con guacamole',
         		'ITEM_DESCRIPTION' => 'Tataki de atún con guacamole y reducción de vinagre de Módena con soja.',
-        		'PRICE' => 11.50,
+        		'ITEM_PRICE' => 11.50,
         		'ITEM_STATUS' => 1
         	],
         	[	'BUS_ID' => 1,
         		'ITEM_NAME' => 'Menú Crispy Chicken',
         		'ITEM_DESCRIPTION' => 'Pan, mayonesa, lechuga, tomate, carne de pollo empanado más complemento y bebida.',
-        		'PRICE' => 7.20,
+        		'ITEM_PRICE' => 7.20,
         		'ITEM_STATUS' => 1
         	],
         	[	'BUS_ID' => 3,
         		'ITEM_NAME' => 'Menú 6',
-        		'ITEM_DESCRIPTION' => '3 Pita + Patatas + 2 Litros Coca Cola',
-        		'PRICE' => 13.50,
+        		'ITEM_DESCRIPTION' => 'Bandeja de Kebab Mixto Grande',
+        		'ITEM_PRICE' => 5.50,
         		'ITEM_STATUS' => 1
         	],
+        ]);
+
+         DB::table('EXTRAS')->insert([
+          [ 'ITEM_ID' => 1,
+            'EXTRA_NAME' => 'Medallón de queso de cabra ECO',
+            'EXTRA_PRICE' => 1.50,
+          ],
+          [ 'ITEM_ID' => 2,
+            'EXTRA_NAME' => 'Semillas de Chía',
+            'EXTRA_PRICE' => 1.20,
+          ],
+          [ 'ITEM_ID' => 3,
+            'EXTRA_NAME' => 'Bacon',
+            'EXTRA_PRICE' => 1.10,
+          ],
+          [ 'ITEM_ID' => 4,
+            'EXTRA_NAME' => 'Salchipapas',
+            'EXTRA_PRICE' => 1.70,
+          ],
         ]);
     }
 }	
